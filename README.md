@@ -22,6 +22,7 @@
 4. 패키지 업데이트
   - sudo apt-get update -y
 5. IPSTABLE 확인('net.bridge.bridge-nf-call-iptables의 값이 1로 설정되어 있는지 확인')
+
     cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
     br_netfilter
     EOF
