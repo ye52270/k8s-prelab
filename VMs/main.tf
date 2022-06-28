@@ -7,7 +7,7 @@ module "net" {
     
     subnet_cidr1      =   var.subnet_cidr1
     subnet_cidr2     =   var.subnet_cidr2
-    subnet_cidr2     =   var.subnet_cidr3
+    subnet_cidr3     =   var.subnet_cidr3
     
     admin_access_cidrs  =   var.admin_access_cidrs
 
