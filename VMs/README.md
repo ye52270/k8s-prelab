@@ -3,16 +3,15 @@ Terraform VMs Example
 
 
 * vnet CIDR 은 10.0.0.0/16
-* Subnet CIDR 은 10.0.1.0/24, 10.0.2.0/24
+* Subnet CIDR 은 10.0.1.0/24, 10.0.2.0/24, 10.0.2.0/24
 
 * SSH 허용을 위한 Admin 용 security_rule 과 HTTP 웹 접속 허용을 위한 Web security_rule 내용으로 security_group 생성
 * Admin Security Group 에는 SSH(22) 포트를 본인 IP 허용하는 Rule 생성
 * Web Security Group 에는 HTTP(80) 포트를 모두 허용 하는 Rule 생성
 * **각 Resource 를 생성하는 코드를 모두 Module 로 제작**
 
-* VM 을 2개 생성
-* 각 VM 생성 후, custom_data 를 통해 index.html 테스트 웹 파일 생성
-
+* VM 을 3개 생성
+ 
 # Step
 
 ## 1. 변수 설정
@@ -27,6 +26,7 @@ region               =          "koreacentral"
 vnet_cidr            =          "10.0.0.0/16"
 subnet_cidr1         =          "10.0.1.0/24"
 subnet_cidr2         =          "10.0.2.0/24"
+subnet_cidr3         =          "10.0.2.0/24"
 password             =          "SKCCcpo!234567"
 admin_access_cidrs   =          "<Your Public IP>/24"
 
