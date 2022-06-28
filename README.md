@@ -68,6 +68,7 @@
         "storage-driver": "overlay2"
         }
         EOF
+        
     11. Docker 실행 및 확인
     
         sudo systemctl enable docker
