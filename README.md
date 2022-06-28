@@ -32,6 +32,7 @@
     EOF
     sudo sysctl --system
  6. docker 설치
+ 
     sudo apt-get -y update
     sudo apt-get -y install \
     apt-transport-https \
@@ -40,18 +41,22 @@
     gnupg \
     lsb-release
   7. Docker의 공식 GPG 키 추가
+  
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg |\
     sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
   8. Stable 저장소 설정
+  
     echo \
     "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
     https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) stable" | \
     sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
    9. docker 설치
+   
        sudo apt-get -y update
        sudo apt-get -y install docker-ce docker-ce-cli containerd.io
    10. CGROUP 설정
+   
          sudo mkdir /etc/docker
         cat <<EOF | sudo tee /etc/docker/daemon.json
         {
@@ -64,39 +69,47 @@
         }
         EOF
     11. Docker 실행 및 확인
+    
         sudo systemctl enable docker
         sudo systemctl daemon-reload
         sudo systemctl restart docker
         sudo systemctl status docker
     12. kubeadm, kubelet, kubectl 설치
+    
         sudo apt-get -y update
         sudo apt-get install -y apt-transport-https ca-certificates curl
     13. Google Cloud 공개 서명 키를 다운로드
+    
         sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg \
         https://packages.cloud.google.com/apt/doc/apt-key.gpg
     14. Kubernetes apt리포지토리를 추가
+    
         echo "deb \
         [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] \
         https://apt.kubernetes.io/ kubernetes-xenial main" | \
         sudo tee /etc/apt/sources.list.d/kubernetes.list
     15. apt 패키지 색인을 업데이트하고, kubelet, kubeadm, kubectl을 설치하고 해당 버전을 고정
+    
         sudo apt-get -y update
         sudo apt-get install -y kubelet kubeadm kubectl
         sudo apt-mark hold kubelet kubeadm kubectl
     16. kubeadm 초기화
+    
         kubeadm init --pod-network-cidr=172.16.0.0/16 --apiserver-advertise-address=<Control Plane 의 Private IP>
         
     * kubeadm init 할 때 container runtime is not running 오류가 날 경우 아래와 같이 조치를 해 준다
+    
        1) rm /etc/containerd/config.toml
        2) systemctl restart containerd
         
        join 명령어를 잘 복사하고, Contol Plane 의 두대 서버에서 1~15번까지 반복해준다.
-     17. Control Plane 구성이 완료되면 아래 명령엉를 실행해 준다
+     17. Control Plane 구성이 완료되면 아래 명령어를 Control Plane 에서 실행해 준다
+     
         mkdir -p $HOME/.kube
         sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
         sudo chown $(id -u):$(id -g) $HOME/.kube/config
         export KUBECONFIG=/etc/kubernetes/admin.conf
         
-        kubeadm join 10.0.1.4:6443 --token i1iyba.we0aw2mjw8dku89z --discovery-token-ca-cert-hash sha256:3f7afbb8113b9e74dd0c16a008c5455218a44b8a77794a7d0762e7023498f755   (이 값은 출력 결과에 맞추어 작성해준다)
+
 
         
