@@ -4,7 +4,7 @@ resource "azurerm_virtual_machine" "web3" {
     resource_group_name   = "${var.prefix}-RG"
     availability_set_id   = azurerm_availability_set.this.id
     delete_os_disk_on_termination    = true
-    network_interface_ids = [azurerm_network_interface.nic2.id]
+    network_interface_ids = [azurerm_network_interface.nic3.id]
     vm_size               = "Standard_D2s_v3"
 
     storage_os_disk {
