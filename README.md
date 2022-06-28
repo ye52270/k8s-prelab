@@ -107,9 +107,17 @@
      17. Control Plane 구성이 완료되면 아래 명령어를 Control Plane 에서 실행해 준다
      
         mkdir -p $HOME/.kube
+        
         sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+        
         sudo chown $(id -u):$(id -g) $HOME/.kube/config
+        
         export KUBECONFIG=/etc/kubernetes/admin.conf
+        
+     18. Control Plane 에서 Calico 네트워크 플러그인 설치
+     
+       - kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+        
         
 
 
