@@ -1,4 +1,4 @@
-prefix               =          "user"
+prefix               =          "user07"
 region               =          "koreacentral"
 vnet_cidr            =          "10.7.0.0/16"
 subnet_cidr1         =          "10.7.1.0/24"
